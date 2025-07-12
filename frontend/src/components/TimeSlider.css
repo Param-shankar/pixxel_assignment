@@ -1,0 +1,57 @@
+.sidebar-time-slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;   /* vertical centering */
+  height: 100%;              /* assumes sidebar gives this container full height */
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.sidebar-date-headings {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  
+}
+
+.sidebar-date-heading {
+  font-size: 1.20rem;
+  color: #888;
+  margin: 0.1rem 0;
+}
+
+.sidebar-day-picker-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sidebar-day-picker-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.selected{
+  background: #7d7a7a;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.sidebar-day-picker-btn:hover {
+  background: #444;
+} 
+

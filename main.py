@@ -1,35 +1,25 @@
-import streamlit as st
-import pandas as pd
-import streamlit.components.v1 as components
+from flask import Flask, send_from_directory, request, jsonify
+import os
+from routes.fileupload import fileupload_blueprint
 
-st.title("Satellite attiude watcher")
-st.write("insert the csv file in the dropbox")
-# file = st.file_uploader("upload the csv file ")
-import streamlit as st
+app = Flask(__name__, static_folder="frontend/dist", static_url_path="")
 
-uploaded_file = None
-
-
-with st.sidebar.form("file-form", clear_on_submit=True):
-    file = st.file_uploader("FILE UPLOADER")
-    submitted = st.form_submit_button("UPLOAD!")
-
-    if submitted and file is not None:
-        st.write("UPLOADED!")
-        # Process your file here
-        uploaded_file = file  # file is set in the sidebar form above
+# setting up the folder path of the user local storage
+FOLDER_PATH = (
+    os.path.join(os.path.expanduser("~"), "Documents", "Satellite_VISUALiZER") + "/"
+)
 
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.write("DataFrame loaded successfully!")
-    st.dataframe(df)
-
-else:
-    st.write("Please upload a CSV file to display its contents.")
+# default route for serving the react(intdex file)
+@app.route("/", methods=["POST", "GET"])
+def serve_index():
+    return send_from_directory(app.static_folder, "index.html")
 
 
-with open("earth_orbit.html", "r") as f:
-    html_string = f.read()
+# ... APIs ......
 
-components.html(html_string, height=880, width=880, scrolling=True)
+app.register_blueprint(fileupload_blueprint);
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

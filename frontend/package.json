@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "http://localhost:5000",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,10 +14,12 @@
     "22": "^0.0.0",
     "@react-three/drei": "^10.5.0",
     "@react-three/fiber": "^9.2.0",
+    "axios": "^1.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-dropzone": "^14.3.8",
     "react-pro-sidebar": "^1.1.0",
+    "react-toastify": "^11.0.5",
     "three": "^0.178.0"
   },
   "devDependencies": {
