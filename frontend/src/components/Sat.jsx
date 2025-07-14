@@ -13,11 +13,9 @@ export default function Satellite({ rotationcube, setrotationcube }) {
   const speed = 0.001;
   let angle = useRef(30);
 
-  console.log("/n/n the value of rotation angle is ...");
-
+  
+  // console.log("\n\n the value of rotation angle is ...");
   console.log(rotationcube);
-
-  console.log("/n/n");
 
   // usefram hook from three fiber to setup the smooth animation
   useFrame(() => {
@@ -89,37 +87,37 @@ export default function Satellite({ rotationcube, setrotationcube }) {
         {/* // [X angle , Y angle , Z angle] */}
         <mesh>
           <boxGeometry args={[0.1, 0.1, 0.1]} />
-          <meshStandardMaterial color="orange" />
+          <meshBasicMaterial color="orange" />
         </mesh>
 
         {/* Red arrow pointing in X direction */}
         <mesh position={[0.15, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.01, 0.01, 0.2]} />
-          <meshStandardMaterial color="red" />
+          <meshBasicMaterial color="red" />
         </mesh>
         <mesh position={[0.25, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
           <coneGeometry args={[0.02, 0.05]} />
-          <meshStandardMaterial color="red" />
+          <meshBasicMaterial color="red" />
         </mesh>
 
         {/* Green arrow pointing in Y direction */}
         <mesh position={[0, 0.15, 0]} rotation={[0, Math.PI / 2, 0]}>
           <cylinderGeometry args={[0.01, 0.01, 0.2]} />
-          <meshStandardMaterial color="green" />
+          <meshBasicMaterial color="green" />
         </mesh>
         <mesh position={[0, 0.25, 0]} rotation={[0, Math.PI / 2, 0]}>
           <coneGeometry args={[0.02, 0.05]} />
-          <meshStandardMaterial color="green" />
+          <meshBasicMaterial color="green" />
         </mesh>
 
         {/* Blue arrow pointing in Z direction */}
         <mesh position={[0, 0, 0.15]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.01, 0.01, 0.2]} />
-          <meshStandardMaterial color="blue" />
+          <meshBasicMaterial color="blue" />
         </mesh>
         <mesh position={[0, 0, 0.25]} rotation={[Math.PI / 2, 0, 0]}>
           <coneGeometry args={[0.02, 0.05]} />
-          <meshStandardMaterial color="blue" />
+          <meshBasicMaterial color="blue" />
         </mesh>
       </group>
     </group>

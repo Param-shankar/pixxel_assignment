@@ -1,0 +1,161 @@
+/* CustomDataViewer.css */
+.customdataviewer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 1rem 0;
+  background: rgba(40, 50, 60, 0.92);
+  color: #fff;
+  border-radius: 12px;
+  margin-top: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+  font-size: 1rem;
+  border: 1px solid rgba(45,140,166,0.08);
+}
+
+.customdataviewer-header {
+  font-size: 1.20rem;
+  color: #2d8ca6;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.customdataviewer-date-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.customdataviewer-label {
+  font-weight: 600;
+  color: #2d8ca6;
+  margin-right: 0.5rem;
+}
+
+.customdataviewer-days {
+  font-size: 1.05rem;
+  color: #888;
+  margin: 0.5rem 0;
+}
+
+.customdataviewer-fetch-btn {
+  margin-top: 10px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  background: #2d8ca6;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, opacity 0.18s;
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(45,140,166,0.08);
+}
+.customdataviewer-fetch-btn:disabled {
+  background: #6a7a85;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.customdataviewer-fetch-btn:hover:enabled {
+  background: #1f556b;
+}
+
+.customdataviewer-preview {
+  margin-top: 1rem;
+  width: 100%;
+}
+.customdataviewer-preview pre {
+  background: #23272f;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  overflow-x: auto;
+}
+
+.customdataviewer-day-picker-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 1rem;
+  padding-top: 1.4rem;
+  padding-bottom: 1.2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.customdataviewer-day-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.customdataviewer-day-btn.selected {
+  background: #7d7a7a;
+  color: #fff;
+}
+.customdataviewer-day-btn:hover {
+  background: #444;
+} 
+
+/* Custom styles for react-datepicker in CustomDataViewer */
+.customdataviewer-container .react-datepicker__input-container input {
+  background: #23272f;
+  color: #fff;
+  border: 1.5px solid #2d8ca6;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.18s, background 0.18s;
+  width: 140px;
+}
+
+.customdataviewer-container .react-datepicker__input-container input:focus {
+  border: 2px solid #2d8ca6;
+  background: #222b33;
+}
+
+.customdataviewer-container .react-datepicker {
+  background: #23272f;
+  color: #fff;
+  border-radius: 8px;
+  border: 1.5px solid #2d8ca6;
+  box-shadow: 0 4px 16px rgba(45,140,166,0.13);
+  font-size: 1rem;
+}
+
+.customdataviewer-container .react-datepicker__header {
+  background: #2d8ca6;
+  color: #fff;
+  border-bottom: 1px solid #23272f;
+  border-radius: 8px 8px 0 0;
+}
+
+.customdataviewer-container .react-datepicker__day {
+  color: #fff;
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.18s;
+}
+
+.customdataviewer-container .react-datepicker__day--selected,
+.customdataviewer-container .react-datepicker__day--keyboard-selected {
+  background: #2d8ca6;
+  color: #fff;
+}
+
+.customdataviewer-container .react-datepicker__day:hover {
+  background: #1f556b;
+  color: #fff;
+} 

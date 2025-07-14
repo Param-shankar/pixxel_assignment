@@ -5,12 +5,38 @@ import Earth from "./components/Earth";
 import LEOOrbit from "./components/LEO";
 import Satellite from "./components/Sat";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { useDropzone } from "react-dropzone";
-import Dropzone from "react-dropzone";
 import { Camera } from "three";
 import axios from "axios";
 import TimeSlider from "./components/TimeSlider";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import CustomDataViewer from "./components/CustomDataViewer";
+
+// replace if data is more zoomed from hour to min/sec
+const timeArray = [
+  "00:00",
+  "01:00",
+  "02:00",
+  "03:00",
+  "04:00",
+  "05:00",
+  "06:00",
+  "07:00",
+  "08:00",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+  "22:00",
+  "23:00",
+];
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -18,54 +44,19 @@ export default function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [showTimeSlider, setShowTimeSlider] = useState(true);
   const [currentTimeIndex, setCurrentTimeIndex] = useState(0);
-  // Example time array (replace with your own)
-  const timeArray = [
-    "00:00",
-    "01:00",
-    "02:00",
-    "03:00",
-    "04:00",
-    "05:00",
-    "06:00",
-    "07:00",
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-    "23:00",
-  ];
+
   //initilly at 0,0,0
   const [rotationcube, setrotationcube] = useState([0, 0, 0]);
   const [seletectedday, setseletectedday] = useState(1);
   //[[date, time , [x,y,z]]]
   const [responsedata, setreponsedata] = useState([]);
-
+  const [customviewerdata, setcustomviewerdata] = useState([]);
+  const [selectedDayForCustomData, setSelectedDayForCustomData] = useState(1);
+  const [Predictedvalue, setPredictedvalue] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   return (
     <div>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Bounce}
-      />
       <button
         className="sidebar-toggle"
         onClick={() => setSidebarOpen((open) => !open)}
@@ -89,58 +80,56 @@ export default function App() {
             max={timeArray.length - 1}
             value={currentTimeIndex}
             onChange={(e) => {
+              console.log("the active menue", activeMenu);
               const newIndex = Number(e.target.value);
               setCurrentTimeIndex(newIndex);
-
-              // Check if responsedata is available and not empty
-              if (!responsedata || responsedata.length === 0) {
-                // Show toast bar if no file/data is present
-                toast.warn(
-                  "Please upload the csv file to see the weekly data",
-                  {
-                    position: "top-right",
-                    autoClose: 1000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    transition: Bounce,
-                  }
-                );
-                setrotationcube([0, 0, 0]);
-                return;
-              }
-
+              console.log
               // Get the data point for the selected day and time
-              const dataIdx =
-                1 * (seletectedday - 1) + 23 * (seletectedday - 1) + newIndex;
-              const dataPoint = responsedata[dataIdx];
-
-              if (dataPoint) {
-                // Assuming dataPoint = [date, time, [x, y, z]]
-                // If your data structure is different, adjust accordingly
-                const angleVector = dataPoint[2]; // [x, y, z] angles
-                setrotationcube(angleVector);
-              } else {
-                // Show toast bar if no dataPoint found
-                toast.warn(
-                  "Please upload the csv file to see the weekly data",
-                  {
-                    position: "top-right",
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    transition: Bounce,
-                  }
-                );
-
-                setrotationcube([0, 0, 0]);
+              if (activeMenu == "custom") {
+                // Check if responsedata is available and not empty
+                if (!customviewerdata || customviewerdata.length === 0) {
+                  // return if no value is found form the backend
+                  return;
+                }
+                const dataIdx =
+                  1 * (selectedDayForCustomData - 1) +
+                  23 * (selectedDayForCustomData - 1) +
+                  newIndex;
+                // console.log(dataIdx);
+                const dataPoint_Custom = customviewerdata[dataIdx];
+                console.log("\n\n the data point custom ", dataPoint_Custom);
+                // checking if data point is empty or not
+                if (dataPoint_Custom) {
+                  // Assuming dataPoint = [predictedValue, date, time, [x, y, z]]
+                  const angleVector = dataPoint_Custom[3]; // [x, y, z] angles
+                  setPredictedvalue(()=> dataPoint_Custom[0]);
+                  console.log("\n\n the predic", dataPoint_Custom[0]);
+                  setrotationcube(angleVector);
+                } else {
+                  // Show toast bar if no dataPoint found
+                  console.log("no data found");
+                  setrotationcube([0, 0, 0]);
+                }
+              } else if (activeMenu == "time" || activeMenu == "upload") {
+                // Check if responsedata is available and not empty
+                if (!responsedata || responsedata.length === 0) {
+                  // return if no value is found form the backend
+                  return;
+                }
+                const dataIdx =
+                  1 * (seletectedday - 1) + 23 * (seletectedday - 1) + newIndex;
+                const dataPoint = responsedata[dataIdx];
+                // console.log("\n\n the data point time file ", dataPoint);
+                // setdataPoint(responsedata[dataIdx]);
+                if (dataPoint) {
+                  // Assuming dataPoint = [date, time, [x, y, z]]
+                  // If your data structure is different, adjust accordingly
+                  const angleVector = dataPoint[2]; // [x, y, z] angles
+                  setrotationcube(angleVector);
+                } else {
+                  // Show toast bar if no dataPoint found
+                  setrotationcube([0, 0, 0]);
+                }
               }
             }}
             className="time-slider"
@@ -183,7 +172,7 @@ export default function App() {
                 }`}
                 onClick={() => setActiveMenu("custom")}>
                 <span className="menu-icon">⚙️</span>
-                Customization
+                Custom Data Viewer
               </MenuItem>
             </Menu>
             {/* file upload box */}
@@ -281,8 +270,23 @@ export default function App() {
               {/* global dropped file in the system  */}
               {activeMenu === "custom" && (
                 <div className="customization-box">
-                  <div className="content-header">Customization</div>
-                  <p>Customization options go here</p>
+                  <h3 style={{ textAlign: "center", marginBottom: "1rem" }}>
+                    Predicted Value:{" "}
+                    {Predictedvalue == null ? "N/A" : Predictedvalue ? "True" : "False"}
+                  </h3>
+                  <CustomDataViewer
+                    rotation={rotationcube}
+                    setrotation={setrotationcube}
+                    responsedata={customviewerdata}
+                    setresponsedata={setcustomviewerdata}
+                    selectedDayForCustomData={selectedDayForCustomData}
+                    setselectedDayForCustomData={setSelectedDayForCustomData}
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                    endDate={endDate}
+                    setEndDate={setEndDate}
+                    Predictedvalue={Predictedvalue}
+                  />
                 </div>
               )}
             </div>
@@ -291,8 +295,6 @@ export default function App() {
         <Canvas
           style={{ height: "100vh", width: "100%", backgroundColor: "black" }}
           camera={{ position: [0, 3, 5], fov: 75 }}>
-          <ambientLight intensity={1} />
-          <directionalLight position={[5, 3, 5]} intensity={1} />
           <Earth />
           <LEOOrbit />
           <Satellite

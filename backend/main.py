@@ -3,7 +3,8 @@ import os
 from routes.fileupload import fileupload_api_endpoint
 from routes.CustomData import CustomData_api_endpoint
 
-app = Flask(__name__, static_folder="frontend/dist", static_url_path="/")
+static_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'frontend', 'dist')
+app = Flask(__name__, static_folder=static_folder, static_url_path="/")
 
 # default route for serving the react(intdex file)
 @app.route("/", methods=["POST", "GET"])

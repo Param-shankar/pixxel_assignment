@@ -16,10 +16,9 @@
     "@react-three/fiber": "^9.2.0",
     "axios": "^1.10.0",
     "react": "^19.1.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
-    "react-dropzone": "^14.3.8",
     "react-pro-sidebar": "^1.1.0",
-    "react-toastify": "^11.0.5",
     "three": "^0.178.0"
   },
   "devDependencies": {
