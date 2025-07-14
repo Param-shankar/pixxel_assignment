@@ -17,6 +17,25 @@ The setup uses React for the user interface (including a time slider and attitud
 - Docker (for the easiest setup).
 - Alternatively, Python 3.11+ and Node.js 16+ for local installation.
 - Git for cloning the repository.
+# Pixxel Attitude Visualizer
+
+This repository contains a full-stack application for visualizing satellite attitude data based on quaternion inputs from CSV files, as per the Pixxel assignment specifications. The app features a React frontend for interactive visualization and a Flask backend for data handling and API services. It's fully dockerized for easy deployment and runs "out of the box" on any machine with Docker installed.
+
+The setup uses React for the user interface (including a time slider and attitude animation) and Flask for backend logic like CSV parsing, data storage, retrieval, and stitching across multiple files. Bonuses like additional data visualizations are included.
+
+## Features
+
+- **Attitude Visualizer**: Interactive 3D animation of satellite orientation using quaternions (Q0-Q3) and timestamps from CSV inputs.
+- **Data Storage and Retrieval**: Handles storage of processed data and retrieval across multiple CSV files, managing overlaps efficiently.
+- **Time Slider**: Allows users to scrub through timestamps for dynamic visualization.
+- **Modular Design**: Clear separation of frontend and backend, with API endpoints for seamless integration.
+- **Docker Support**: Packaged as a Docker image for one-command setup and portability.
+
+## Prerequisites
+
+- Docker (for the easiest setup).
+- Alternatively, Python 3.11+ and Node.js 16+ for local installation.
+- Git for cloning the repository.
 
 ## Installation
 
