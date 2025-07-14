@@ -68,8 +68,9 @@ const CustomDataViewer = ({
           error.response &&
           error.response.data
         ) {
-          alert(error.response?.data[0].data);
-          setData({ error: error.response?.data[0]?.data });
+          console.log(error);
+          alert(error.response?.data?.data);
+          setData({ error: error.response?.data.data });
           setresponsedata([]);
         } else {
           setData({ error: "Failed to fetch data." });
