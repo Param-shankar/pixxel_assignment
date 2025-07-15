@@ -83,7 +83,6 @@ export default function App() {
               console.log("the active menue", activeMenu);
               const newIndex = Number(e.target.value);
               setCurrentTimeIndex(newIndex);
-              console.log
               // Get the data point for the selected day and time
               if (activeMenu == "custom") {
                 // Check if responsedata is available and not empty

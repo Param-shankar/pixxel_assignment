@@ -4,7 +4,7 @@ import random
 import os 
 from datetime import datetime
 
-def generate_example_csv(filename="example_next_16_days.csv"):
+def generate_example_csv(filename="example_next_166_days.csv"):
     # Start from today
     start_date = datetime.now().date()
     rows = []

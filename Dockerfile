@@ -17,13 +17,11 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 
 # Install Python dependencies
-COPY req.txt .
-RUN pip install --no-cache-dir -r req.txt
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
 COPY backend/ backend/
-COPY routes/ routes/
-COPY utils/ utils/
 COPY backend/main.py .
 
 # Copy built frontend from previous stage

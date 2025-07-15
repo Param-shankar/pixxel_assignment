@@ -4,10 +4,9 @@ from datetime import datetime
 import csv
 import numpy as np
 import time
+from utils.pathutils import get_data_path
 
-FOLDER_PATH = (
-    os.path.join(os.path.expanduser("~"), "Documents", "Satellite_VISUALiZER") + "/"
-)
+FOLDER_PATH = get_data_path()
 
 # folder path to master file
 FOLDER_PATH_Master_File = os.path.join(FOLDER_PATH, "Master")
@@ -108,4 +107,3 @@ def merge_with_masterfile(filepath):
 
     # update the master file with the new dataframe
     MasterFile_dataframe.to_csv(master_file_path, index=False)
-

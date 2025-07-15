@@ -4,14 +4,13 @@ from werkzeug.utils import secure_filename
 import pandas as pd
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from utils.pathutils import get_data_path
 
-#create a blueprint for the CustomData API
+# create a blueprint for the CustomData API
 CustomData_api_endpoint = Blueprint("CustomData_api_endpoint_blueprint", __name__)
 
 # setting up the folder path of the user local storage
-FOLDER_PATH = (
-    os.path.join(os.path.expanduser("~"), "Documents", "Satellite_VISUALiZER") + "/"
-)
+FOLDER_PATH = get_data_path()
 
 # setting up the folder path of the master file
 FOLDER_PATH_Master_File = os.path.join(FOLDER_PATH, "Master")

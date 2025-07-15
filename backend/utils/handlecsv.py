@@ -4,11 +4,10 @@ from datetime import datetime
 import csv
 from scipy.spatial.transform import Rotation as R
 import numpy as np
+from utils.pathutils import get_data_path
 
 # folder path for the
-FOLDER_PATH = (
-    os.path.join(os.path.expanduser("~"), "Documents", "Satellite_VISUALiZER") + "/"
-)
+FOLDER_PATH = get_data_path()
 
 
 def formatting_csv(filepath):

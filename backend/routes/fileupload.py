@@ -3,13 +3,12 @@ import os
 from utils.handlecsv import formatting_csv, file_rename
 from werkzeug.utils import secure_filename
 from utils.mergermaster import merge_with_masterfile
+from utils.pathutils import get_data_path
 
 fileupload_api_endpoint = Blueprint("fileupload", __name__)
 
 # setting up the folder path of the user local storage
-FOLDER_PATH = (
-    os.path.join(os.path.expanduser("~"), "Documents", "Satellite_VISUALiZER") + "/"
-)
+FOLDER_PATH = get_data_path()
 
 
 @fileupload_api_endpoint.route("/fileUpload", methods=["POST"])
