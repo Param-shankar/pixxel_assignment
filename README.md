@@ -50,7 +50,8 @@ Since you have the Docker image ready, this is the simplest way to get started. 
 
 2. Run the container:
    ```
-   docker run -p 5000:5000 pixxel_assignemnt
+   docker run -p 5000:5000 pixxel_assignment
+
    ```
    - This exposes the app on port 5000.
 
