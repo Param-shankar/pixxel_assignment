@@ -128,7 +128,7 @@ const CustomDataViewer = ({
             key={idx}
             className={`customdataviewer-day-btn${
               selectedDayForCustomData === idx + 1 ? " selected" : ""
-            }`}
+              }`}
             onClick={() => setselectedDayForCustomData(idx + 1)}>
             {date.toLocaleDateString("en-CA")}
           </button>
